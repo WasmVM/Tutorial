@@ -87,10 +87,21 @@ Values in the stack:
 Type: i32, Value: 3
 ```
 
-如果看到以下訊息，表示之前編譯的時候系統呼叫功能關了，但是沒有用 Debug 模式  
-執行 \`make clean\`
+如果看到以下訊息，表示之前編譯的時候系統呼叫功能關了，但是沒有用 Debug 模式
 
+```
+(func: 0, offset: 3) [unreachable] Trap without syscall provided.
+```
 
+如果看到以下訊息，表示之前編譯的時候系統呼叫功能沒有關
 
+```
+(func: 0, offset: 3) [syscall][sys_close] No enough value in the stack.
+```
 
+發生以上兩種狀況，請先執行
+
+`make clean`
+
+然後重新執行 CMake 和 Make 編譯程式
 
