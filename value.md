@@ -4,7 +4,7 @@
 
 電腦是透過電來操作，而電路的狀態可以簡單的用 0 \(斷電\) 或 1 \(通電\) 來表示，因此一個表示 0 或 1 的單位我們稱為一個 **位元**
 
-一筆資料裡最大的位元 \(Most Significant Bit\)，習慣上簡稱為 &lt;font color="red"&gt;MSB&lt;/font&gt;，最小的位元 \(Least Significant Bit\)，習慣上簡稱為 **LSB**
+一筆資料裡最大的位元 \(Most Significant Bit\)，習慣上簡稱為 &lt;font color="red"&gt;MSB&lt;/font&gt; ，最小的位元 \(Least Significant Bit\)，習慣上簡稱為 **LSB**
 
 \(有些比較特殊的電腦會用 3 個數字表示斷電、正電、負電三種狀態，這不在我們的討論範圍之內\)
 
