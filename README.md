@@ -2,8 +2,6 @@
 
 透過 WasmVM, 從頭認識 WebAssembly 的基本概念
 
-##### 基礎篇
-
 * [下載和編譯 WasmVM](/build.md)
 * [第一個 WebAssembly 程式](/getting-start.md)
 * [堆疊](/stack.md)
@@ -16,9 +14,6 @@
 * [函式表](/table.md)
 * [模組](/module.md)
 * [虛擬機架構](/wasmvm-structure.md)
-
-##### 進階篇
-
 * [系統呼叫](/syscall.md "系統呼叫")
 * [位元格式](/binary-format.md)
 * [載入與初始化](/validation.md)

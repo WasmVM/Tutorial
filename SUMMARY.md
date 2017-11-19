@@ -13,7 +13,7 @@
 * [函式表](table.md)
 * [模組](module.md)
 * [虛擬機架構](wasmvm-structure.md)
-* [系統呼叫\[進階\]](syscall.md)
-* [位元格式\[進階\]](binary-format.md)
-* [載入與初始化\[進階\]](validation.md)
+* [系統呼叫](syscall.md)
+* [位元格式](binary-format.md)
+* [載入與初始化](validation.md)
 
