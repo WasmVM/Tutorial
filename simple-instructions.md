@@ -113,6 +113,60 @@ Type: f32, Value: 0.0108
 
 ### 整數一元運算
 
+一元運算只接受一個數值，因此在堆疊中就是單純的把一個數拿出來，運算完再放回去。
+
+* i32.clz
+  * 計算這個整數的位元表示中，最左邊的 1 的左邊有幾個 0
+* i32.ctz
+  * 計算這個整數的位元表示中，最右邊的 1 的右邊有幾個 0
+* i32.popcnt
+  * 計算這個整數的位元表示中，總共有幾個 1
+* i32.eqz
+  * 檢查這個整數是否為 0，是的話放入 1，不是的話放入 0
+
+以下是 i64 的版本，運算方式和 i32 一樣
+
+* i64.clz
+* i64.ctz
+* i64.eqz
+* i64.popcnt
+
+```
+(module
+    (func $main
+        i32.const 2248752  ;; 00000000 00100010 01010000 00110000
+        i32.clz 
+        unreachable
+        i32.const 2248752
+        i32.ctz 
+        unreachable
+        i32.const 2248752
+        i32.popcnt 
+        unreachable
+        i32.const 2248752
+        i32.eqz
+        unreachable
+        i32.const 0
+        i32.eqz
+        unreachable
+    )
+    (start $main)
+)
+```
+
+```
+Values in the stack:
+Type: i32, Value: 10
+Values in the stack:
+Type: i32, Value: 4
+Values in the stack:
+Type: i32, Value: 6
+Values in the stack:
+Type: i32, Value: 0
+Values in the stack:
+Type: i32, Value: 1
+```
+
 ### 整數二元運算
 
 ### 浮點數一元運算
