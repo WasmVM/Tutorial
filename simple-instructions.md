@@ -169,6 +169,77 @@ Type: i32, Value: 1
 
 ### 整數二元運算
 
+二元運算接受兩個數值，因此在堆疊中把兩個數拿出來，運算完再放回去。
+
+雖然堆疊有後進先出的性質，不過 WebAssembly 為了讓程式比較直覺，在二元指令運算的時候會把順序調換，所以先進堆疊的會放在運算的左邊，後進的會放在右邊，和從堆疊出來的順序相反
+
+#### 四則運算
+
+* i32.add
+  * 兩數相加
+* i32.sub
+  * 兩數相減
+* i32.mul
+  * 兩數相乘
+* i32.div\_s
+  * 兩數當作**有號整數**相除，取商數，捨去小數部份
+* i32.div\_u
+  * 兩數當作**無號整數**相除，取商數，捨去小數部份
+* i32.rem\_s
+  * 兩數當作**有號整數**相除，取餘數
+* i32.rem\_u
+  * 兩數當作**無號整數**相除，取餘數
+* 以上指令都有 i64 版本
+
+```
+(module
+    (func $main
+        i32.const 16
+        i32.const 11
+        i32.add
+        unreachable
+        i32.const 16
+        i32.const 11
+        i32.sub
+        unreachable
+    )
+    (start $main)
+)
+```
+
+```
+Values in the stack:
+Type: i32, Value: 27
+Values in the stack:
+Type: i32, Value: 5
+```
+
+#### 位元運算
+
+* i32.and
+* i32.or
+* i32.xor
+* i32.shl
+* i32.shr\_u
+* i32.shr\_s
+* i32.rotl
+* i32.rotr
+* 以上指令都有 i64 版本
+
+#### 比較運算
+
+* i32.eq
+* i32.ne
+* i32.lt\_s
+* i32.le\_s
+* i32.lt\_u
+* i32.le\_u
+* i32.gt\_s
+* i32.ge\_s
+* i32.gt\_u
+* i32.ge\_u
+* 以上指令都有 i64 版本
+
 ### 浮點數一元運算
 
 ### 浮點數二元運算
