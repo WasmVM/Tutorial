@@ -61,7 +61,7 @@ make
 ```
 (module
     (func $main
-        i32.const 5
+        i32.const 3
         unreachable
     )
     (start $main)
