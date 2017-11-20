@@ -56,7 +56,34 @@
 
 在先前的範例中我們是用 10 進位的數字輸入整數，你也可以在整數或小數的數字前面加上 `0x`，表示輸入的是 16 進位的數字
 
-或是在浮點數的指令裡用 inf 輸入無限，nan 
+或是在浮點數的指令裡用 `inf` 輸入無限，`nan` 輸入 NaN
+
+```
+(module
+    (func $main
+        i32.const 3
+        i64.const 0x14
+        f32.const -0.25
+        f64.const -0x2.1
+        f32.const -inf
+        f32.const nan
+        unreachable
+    )
+    (start $main)
+)
+```
+
+執行之後得到以下的結果
+
+```
+Values in the stack:
+Type: f32, Value: nan
+Type: f32, Value: -inf
+Type: f64, Value: -32.0625
+Type: f32, Value: -0.25
+Type: i64, Value: 20
+Type: i32, Value: 3
+```
 
 ### 整數一元運算
 
