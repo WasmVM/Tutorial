@@ -2,9 +2,10 @@
 
 討論完堆疊和數值形別之後，接下來就能透過指令做簡單的運算
 
-回到 [第一個 WebAssembly 程式](/getting-start.md)
+回到 [第一個 WebAssembly 程式](/getting-start.md)，你會看到下面這段程式碼
 
 ```
+(module
     (func $main
         i32.const 3
         unreachable
