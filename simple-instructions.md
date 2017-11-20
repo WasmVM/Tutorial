@@ -220,24 +220,26 @@ Type: i32, Value: 5
   * AND \(或\) 運算：兩個位元都是 1 才會輸出 1，否則輸出 0
   * 把兩個數的位元對齊之後，每個位數分別做 AND 運算
 
+![](/images/and.png)
 
-  ![](/images/and.png)
 * i32.or
   * OR \(且\) 運算：兩個位元都是 0 才會輸出 0，否則輸出 1
   * 把兩個數的位元對齊之後，每個位數分別做 OR 運算
 
+![](/images/or.png)
 
-  ![](/images/or.png)
-* i32.xor
-  * XOR 運算：兩個位元相同的話輸出 0，否則輸出 1
-  * 把兩個數的位元對齊之後，每個位數分別做 XOR 運算
+i32.xor
 
-  ![](/images/xor.png)
+* XOR 運算：兩個位元相同的話輸出 0，否則輸出 1
+* 把兩個數的位元對齊之後，每個位數分別做 XOR 運算
+
+![](/images/xor.png)
+
 * i32.shl
   * 假設那兩個整數為 a, b，把 a 數的位元向左移 b 位，並在右邊補 0
 
+![](/images/shl.png)
 
-  ![](/images/shl.png)
 * i32.shr\_u
 * i32.shr\_s
 * i32.rotl
