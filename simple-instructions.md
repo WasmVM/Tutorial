@@ -442,16 +442,16 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
 
 ## 控制指令
 
-* nop
+* **nop**
   * 不做任何事
-* unreachable
+* **unreachable**
   * 這個指令的本意是製造一個例外狀況，不過在 WasmVM 裡利用製造的中斷來實作系統呼叫
   * 在有開啟系統呼叫時，unreachable 會執行系統呼叫
   * 沒開啟系統呼叫時
     * 以 Debug 模式編譯，會輸出堆疊裡的數值，不放回堆疊，方便除錯
     * 以 Release 模式編譯，會中止程式，並得到錯誤訊息
 
-### 區塊指令
+### 區塊
 
 接下來的 block、loop、if 指令會開啟新的程式區塊 \(block\)。其實就是在堆疊裡放入一個標籤 \(Label\)，這個 label 會記錄目前所處的函式、進入 block 時程式執行的位置，以及離開 block 的時候要接著執行的位置。
 
@@ -466,4 +466,40 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
 WebAssembly 的 block 比較像是開一個新的空間，在新的空間裡執行 block 裡的指令。一層層的架構形成結構化的控制流程 \(Structured Control Flow\)，讓指令的執行時機比較好掌控。
 
 ![](/images/block.png)
+
+其實 block 也不是完全開一個全新的空間，而是在堆疊裡的 label 有類似"遮罩"的作用，把堆疊裡的數值先遮住，讓後面的程式看不到先前留在堆疊裡的數值，block 結束之後 label 被拿走，原本在堆疊裡的數值又重見天日
+
+block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩下的數值用 drop 捨棄或是用其他方法清空，否則在編譯wasm時
+
+以下是會產生區塊的控制指令 \(函式也會，不過留待 [函式](/function.md) 章節再做討論\)
+
+* **block ... end**
+  * block 和 end 是成對存在，中間放入要在 block 裡執行的指令，可以參考以下範例
+  * ```
+    (module
+        (func $main
+            block
+                i32.const 5
+                drop
+            end
+        )
+        (start $main)
+    )
+    ```
+  * 也可以幫 block 加上一個開頭是 $ 的名稱，方便之後的 br 指令操作
+
+  * ```
+    (module
+        (func $main
+            block $aaa
+                i32.const 5
+                drop
+            end
+        )
+        (start $main)
+    )
+    ```
+  * 還可以指定一個 block 的回傳值，這樣 block 在結束的時候，就不一定要清空，可以在堆疊裡留下一個數值給上一層的 block 使用
+
+
 
