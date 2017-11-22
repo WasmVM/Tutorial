@@ -469,11 +469,12 @@ WebAssembly 的 block 比較像是開一個新的空間，在新的空間裡執�
 
 其實 block 也不是完全開一個全新的空間，而是在堆疊裡的 label 有類似"遮罩"的作用，把堆疊裡的數值先遮住，讓後面的程式看不到先前留在堆疊裡的數值，block 結束之後 label 被拿走，原本在堆疊裡的數值又重見天日
 
-block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩下的數值用 drop 捨棄或是用其他方法清空，否則在編譯wasm時
+block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩下的數值用 drop 捨棄或是用其他方法清空，否則在轉換成 wasm 時會產生錯誤而無法轉換
 
 以下是會產生區塊的控制指令 \(函式也會，不過留待 [函式](/function.md) 章節再做討論\)
 
 * **block ... end**
+
   * block 和 end 是成對存在，中間放入要在 block 裡執行的指令，可以參考以下範例
   * ```
     (module
@@ -500,6 +501,82 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
     )
     ```
   * 還可以指定一個 block 的回傳值，這樣 block 在結束的時候，就不一定要清空，可以在堆疊裡留下一個數值給上一層的 block 使用
+  * ```
+    (module
+        (func $main
+            block $aaa (result i32)
+                i32.const 5
+            end
+            drop
+        )
+        (start $main)
+    )
+
+    ```
+
+* **loop ... end**
+  * loop 和 block 大致上相同，唯一不同的地方在於 block 執行完之後會繼續執行接下來的指令，loop 則是再回到 loop 的開頭執行 loop 裡的指令
+  * ```
+    (module
+        (func $main
+            loop
+                i32.const 3
+                unreachable
+            end 
+        )
+        (start $main)
+    )
+    ```
+
+    上面這段範例執行之後發現停不下來是正常的，因為我們沒有跳出 loop，所以會一直不斷的回到 loop 的地方執行。這時可以按 Ctrl + C 強制結束程式
+
+* **if ... else ... end**
+  * if 會從堆疊裡拿出一個 i32 數值，如果這個數值不是 0，開一個 block 執行 if 到 else 之間的指令；如果這個數值是 0，開一個 block 執行 else 到 end 之間的指令
+  * ```
+    (module
+    	(func $main
+    		i32.const 1
+    		if (result i32)
+    		    i32.const 2
+    		else
+    		    i32.const 3
+    		end
+    		unreachable
+    	)
+    	(start $main)
+    )
+    ```
+
+    執行結果
+
+  * ```
+    Values in the stack:
+    Type: i32, Value: 2
+    ```
+
+    如果把 1 換成 0，會得到以下的結果
+
+  * ```
+    Values in the stack:
+    Type: i32, Value: 3
+    ```
+  * 可以省略 else 的部份，這樣當 if 從堆疊拿出 0 的時候就會繼續執行 end 之後的指令，不會執行 if 到 end 之間的指令
+
+  * ```
+    (module
+    	(func $main
+    		i32.const 1
+    		if (result i32)
+    		    i32.const 2
+    		end
+    		unreachable
+    	)
+    	(start $main)
+    )
+
+    ```
+
+
 
 
 
