@@ -453,5 +453,17 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
 
 ### 區塊指令
 
-接下來的 block、loop、if 指令會開啟新的程式區塊 \(block\)。其實就是在堆疊裡放入一個標籤 \(Label\)，這個 Label 會記錄目前所處的函式、進入 block 時程式執行的位置，以及離開 block 的時候要接著執行的位置
+接下來的 block、loop、if 指令會開啟新的程式區塊 \(block\)。其實就是在堆疊裡放入一個標籤 \(Label\)，這個 label 會記錄目前所處的函式、進入 block 時程式執行的位置，以及離開 block 的時候要接著執行的位置。
+
+等到要離開 block 的時候，再從堆疊把剛剛放進去的 label 拿出來，根據之前的記錄決定要從哪邊繼續執行程式
+
+大部分的組合語言會在程式的某個部份加入 label ，這種 label 就只是標籤而已，標示可以給 jump 指令跳過去的地方，再用 jump 指令改變程式的執行順序
+
+![](/images/jump.png)
+
+然而這種 label 可以放在幾乎任何地方，當 label 和 jump 指令變多，程式的執行順序會不好掌握，容易造成問題
+
+WebAssembly 的 block 比較像是開一個新的空間，在新的空間裡執行 block 裡的指令。一層層的架構形成結構化的控制流程 \(Structured Control Flow\)，讓指令的執行時機比較好掌控。
+
+![](/images/block.png)
 
