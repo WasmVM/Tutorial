@@ -32,7 +32,113 @@
 
   加上 mut 表示可變動 \(mutable\)，這樣就能在之後用 set\_global 指令更改這個變數的值
 
-* 也可以加上以 $ 開頭的名稱，讓之後的存取更方便
+也可以加上以 $ 開頭的名稱，讓之後的存取更方便
 
+```
+  (module
+    (global $blah (mut i32) i32.const 5)
+  )
+```
 
+每個全域變數會有一個從 0 開始的編號，因此在 module 裡從上到下分別是 0, 1, 2 ...，之後存取變數的時候就是用編號來區分
 
+#### 區域變數宣告
+
+區域變數是伴隨函式產生，所以區域變數的宣告也是寫在函式的地方
+
+```
+(module
+  (func (local i32 f32 i32)
+    i32.const 5
+    drop
+  )
+)
+```
+
+每個區域變數會有一個從 0 開始的編號，因此從左到右分別是 0, 1, 2 ...，之後存取變數的時候就是用編號來區分
+
+當然為了方便，也可以將變數加上以 $ 開頭的名稱，不過就必須分開寫
+
+```
+(module
+  (func (local $aaa i32) (local $bbb f32) (local i32)
+    i32.const 5
+    drop
+  )
+)
+```
+
+另外區域變數都是可以變動的，沒有區分可不可變動，使用上要小心不要動到不希望變動的區域變數
+
+#### 變數指令
+
+* **get_global**
+
+  後面接上編號或名稱，將 **全域變數** 的值放進堆疊裡
+  ```
+  (module
+    (global i32 i32.const 4)
+    (func
+      get_global 0
+      unreachable
+    )
+  )
+  ```
+
+* **set_global**
+
+  後面接上編號或名稱，從堆疊裡取出一個數值，放進 **全域變數** 
+
+  **必須是 可變動 的全域變數才能執行這個操作**
+
+  ```
+  (module
+    (global (mut i32) i32.const 4)
+    (func
+      get_global 0
+      unreachable
+      i32.const 5
+      set_global 0
+      get_global 0
+      unreachable
+    )
+  )
+  ```
+
+* **get_local**
+
+  後面接上編號或名稱，將 **區域變數** 的值放進堆疊裡
+
+* **set_local**
+
+  後面接上編號或名稱，從堆疊裡取出一個數值，放進 **區域變數** 
+
+  ```
+  (module
+    (func (local i32)
+      i32.const 7
+      i32.const 6
+      set_local 0
+      get_local 0
+      unreachable
+    )
+  )
+  ```
+
+* **tee_local**
+
+  後面接上編號或名稱，從堆疊裡取出一個數值，放進 **區域變數**，不過數值會再放回堆疊裡
+
+  ```
+  (module
+    (func (local i32)
+      i32.const 7
+      i32.const 6
+      tee_local 0
+      get_local 0
+      unreachable
+    )
+  )
+  ```
+
+  可以比較一下這個範例和 set_local 範例的不同

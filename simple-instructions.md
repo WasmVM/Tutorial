@@ -481,7 +481,7 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
         (func $main
             block
                 i32.const 5
-                drop
+                unreachable
             end
         )
         (start $main)
@@ -494,7 +494,7 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
         (func $main
             block $aaa
                 i32.const 5
-                drop
+                unreachable
             end
         )
         (start $main)
@@ -507,7 +507,7 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
             block $aaa (result i32)
                 i32.const 5
             end
-            drop
+            unreachable
         )
         (start $main)
     )
@@ -585,11 +585,11 @@ Branch instruction 一般會翻譯為 "分支指令"，不過我認為在 WebAss
     (func $main
         loop
            i32.const 5
-           drop
+           unreachable
            br 0
         end
         i32.const 3
-        drop
+        unreachable
     )
     (start $main)
 )
@@ -603,15 +603,14 @@ br 0 會回到上 $$0+1$$ 層 \(就是上一層\)，然後接著執行 loop ... 
         block
             loop
                 i32.const 5
-                drop
+                unreachable
                 br 1
             end
             i32.const 3
-            drop
+            unreachable
         end
         i32.const 4
-        drop
-
+        unreachable
     )
     (start $main)
 )
@@ -629,14 +628,14 @@ br 1 會回到上 $$1+1$$ 層，所以是接著執行 block ... end 之後的指
             block $aaa
                 loop
                     i32.const 5
-                    drop
+                    unreachable
                     br $aaa
                 end
                 i32.const 3
-                drop
+                unreachable
             end
             i32.const 4
-            drop
+            unreachable
 
         )
         (start $main)
@@ -655,10 +654,10 @@ br 1 會回到上 $$1+1$$ 層，所以是接著執行 block ... end 之後的指
                     br_if $aaa
                 end
                 i32.const 3
-                drop
+                unreachable
             end
             i32.const 4
-            drop
+            unreachable
 
         )
         (start $main)
@@ -668,8 +667,6 @@ br 1 會回到上 $$1+1$$ 層，所以是接著執行 block ... end 之後的指
 * **br\_table**
 
   * 後面會接著至少一個要跳回的目標，然後從堆疊中取出一個 i32 數值 $$n$$，如果 $$ 0 \le n \lt 總數量$$，跳回第 $$n-1$$ 個目標 \(從 0 開始數\)，否則跳回最後一個目標
-
-
 
   ![](/images/brtable.png)
 

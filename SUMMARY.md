@@ -15,7 +15,6 @@
 * [儲存空間](store.md)
 
   * [變數](variables.md)
-
   * [記憶體](memory.md)
   * [函式](function.md)
   * [函式表](table.md)
