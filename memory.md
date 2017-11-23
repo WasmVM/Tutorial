@@ -1,6 +1,6 @@
 # 記憶體 (Memory)
 
-WebAssembly 的記憶體是以 byte 為單位的連續空間，大小從 0 開始，以 $$64 \times 1024 bytes$$ 為單位漸漸擴充，每 $$64 \times 1024 bytes$$ 稱為一個 **page**
+WebAssembly 的記憶體是以 byte 為單位的連續空間，大小從 0 開始，以 $$64 \times 1024$$ bytes 為單位漸漸擴充，每 $$64 \times 1024$$ bytes 稱為一個 **page**
 
 ![](/images/memory.png)
 
