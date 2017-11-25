@@ -16,7 +16,6 @@
 * [虛擬機架構](/wasmvm-structure.md)
 * [系統呼叫](/syscall.md "系統呼叫")
 * [位元格式](/binary-format.md)
-* [載入與初始化](/validation.md)
 
 
 

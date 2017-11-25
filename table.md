@@ -47,7 +47,7 @@ Table 的指定不再是用指令來操作，而是在 module 裡的 elem 宣告
 )
 ```
 
-第一個 0 表示要指定編號為 0 的 table，由於目前在 WebAssembly 規格裡每個模組只能有一個 table，所以基本上只能是 0
+第一個 0 表示要指定編號為 0 的 table，由於目前在 WebAssembly 規格裡每個模組只能有一個 table，所以基本上只能是 0，或是 table 的名稱
 
 後面的 i32.const 1 表示要從編號第 1 的位置開始指定
 
@@ -67,9 +67,10 @@ elem 宣告也可以不只一個，如果指定的範圍有重複，以最下面
 	)
 	(table $ddd 0 3 anyfunc)
 	(elem 0 (i32.const 0) 1 0)
-	(elem 0 (i32.const 1) 2 $aaa)
+	(elem $ddd (i32.const 1) 2 $aaa)
 )
 ```
+
 
 ## 間接呼叫函式
 

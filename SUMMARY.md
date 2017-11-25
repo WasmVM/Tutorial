@@ -27,7 +27,5 @@
 
 * [位元格式](binary-format.md)
 
-* [載入與初始化](loading.md)
-
 
 
