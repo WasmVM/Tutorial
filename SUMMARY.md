@@ -21,11 +21,10 @@
 
 * [模組](module.md)
 
+* [位元格式](binary-format.md)
+
 * [虛擬機架構](wasmvm-structure.md)
 
 * [系統呼叫](syscall.md)
 
-* [位元格式](binary-format.md)
-
-
-
+* [參考資料](references.md)
