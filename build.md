@@ -8,11 +8,11 @@ WasmVM 是透過 CMake 完成編譯相關的動作和設定。除此之外只有
 sudo apt install git cmake binutil
 ```
 
-* 接著從 GitHub 取得 WasmVM 的 簡化版 (如果要使用一般版的話，不需要 git checkout 那行指令)
+* 接著從 GitHub 取得 WasmVM 的 簡化版 \(如果要使用一般版的話，不需要 git checkout 那行指令\)
 
 ```
 git clone git@github.com:LuisHsu/WasmVM.git
-git checkout v1.0-tiny-syscall
+git checkout v0.9
 ```
 
 * 在 WasmVM 資料夾裡建立 build 資料夾，並進入 build 資料夾
@@ -36,3 +36,4 @@ make
 ```
 
 等待編譯完成，就可以得到 WasmVM
+
