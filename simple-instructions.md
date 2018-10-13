@@ -2,9 +2,9 @@
 
 討論完堆疊和數值形別之後，接下來就能透過指令做簡單的運算
 
-回到 [第一個 WebAssembly 程式](/getting-start.md)，你會看到下面這段程式碼
+回到 [第一個 WebAssembly 程式](getting-start.md)，你會看到下面這段程式碼
 
-```
+```text
 (module
     (func $main
         i32.const 3
@@ -14,9 +14,9 @@
 )
 ```
 
-你可以像下面一樣，用 `;;`** **在程式裡做註解，在`;;`之後，一直到換行為止的文字都會被省略
+你可以像下面一樣，用 `;;` ****在程式裡做註解，在`;;`之後，一直到換行為止的文字都會被省略
 
-```
+```text
 (module
     (func $main
         ;; lalala
@@ -27,9 +27,9 @@
 )
 ```
 
-如果想要一次省略多行，可以用 `(;`** **和`;)`夾住，中間的文字都會被省略
+如果想要一次省略多行，可以用 `(;` ****和`;)`夾住，中間的文字都會被省略
 
-```
+```text
 (module
     (func $main
         (; woolala
@@ -41,26 +41,31 @@
 )
 ```
 
----
-
-## 算術指令 (Numeric Instructions)
+## 算術指令 \(Numeric Instructions\)
 
 ### 常數宣告
 
 * `i32.const 整數`
+
   這個指令會把一個 32 位元的整數放進堆疊
+
 * `i64.const 整數`
+
   這個指令會把一個 64 位元的整數放進堆疊
+
 * `f32.const 小數` 
+
   這個指令會把一個單精度浮點數放進堆疊
+
 * `f64.const 小數`
+
   這個指令會把一個雙精度浮點數放進堆疊
 
 在先前的範例中我們是用 10 進位的數字輸入整數，你也可以在整數或小數的數字前面加上 `0x`，表示輸入的是 16 進位的數字
 
 或是在浮點數的指令裡用 `inf` 輸入無限，`nan` 輸入 NaN
 
-```
+```text
 (module
     (func $main
         i32.const 3
@@ -77,7 +82,7 @@
 
 執行之後得到以下的結果
 
-```
+```text
 Values in the stack:
 Type: f32, Value: nan
 Type: f32, Value: -inf
@@ -94,7 +99,7 @@ Type: i32, Value: 3
 * 10 進位：$$1.08\times10^{-2} \Rightarrow$$ 1.08e-2 或 1.08E-2
 * 16 進位：$$1.08\times16^{-2} \Rightarrow$$ 0x1.08p-2 或 0x1.08P-2
 
-```
+```text
 (module
     (func $main
         f32.const 1.08e-2
@@ -105,7 +110,7 @@ Type: i32, Value: 3
 )
 ```
 
-```
+```text
 Values in the stack:
 Type: f32, Value: 0.257812
 Type: f32, Value: 0.0108
@@ -131,7 +136,7 @@ Type: f32, Value: 0.0108
 * i64.eqz
 * i64.popcnt
 
-```
+```text
 (module
     (func $main
         i32.const 2248752  ;; 00000000 00100010 01010000 00110000
@@ -154,7 +159,7 @@ Type: f32, Value: 0.0108
 )
 ```
 
-```
+```text
 Values in the stack:
 Type: i32, Value: 10
 Values in the stack:
@@ -193,7 +198,7 @@ Type: i32, Value: 1
   * 兩數當作**無號整數**相除，取餘數
 * 以上指令都有 i64 版本
 
-```
+```text
 (module
     (func $main
         i32.const 16
@@ -209,7 +214,7 @@ Type: i32, Value: 1
 )
 ```
 
-```
+```text
 Values in the stack:
 Type: i32, Value: 27
 Values in the stack:
@@ -224,44 +229,44 @@ Type: i32, Value: 5
   * AND \(或\) 運算：兩個位元都是 1 才會輸出 1，否則輸出 0
   * 把兩個數的位元對齊之後，每個位數分別做 AND 運算
 
-![](/images/and.png)
+![](.gitbook/assets/and.png)
 
 * **i32.or**
   * OR \(且\) 運算：兩個位元都是 0 才會輸出 0，否則輸出 1
   * 把兩個數的位元對齊之後，每個位數分別做 OR 運算
 
-![](/images/or.png)
+![](.gitbook/assets/or.png)
 
 * **i32.xor**
   * XOR 運算：兩個位元相同的話輸出 0，否則輸出 1
   * 把兩個數的位元對齊之後，每個位數分別做 XOR 運算
 
-![](/images/xor.png)
+![](.gitbook/assets/xor.png)
 
 * **i32.shl**
   * 把 a 數的位元向左移 b 位，並在右邊補 0
 
-![](/images/shl.png)
+![](.gitbook/assets/shl.png)
 
 * **i32.shr\_u**
   * 把 a 數的位元向右移 b 位，並在右邊補 0
 
-![](/images/rsh_u.png)
+![](.gitbook/assets/rsh_u.png)
 
 * **i32.shr\_s**
   * 把 a 數的位元向右移 b 位，如果 a 數的 sign 是 0 的話補 0，1 的話補 1
 
-![](/images/rsh_s.png)
+![](.gitbook/assets/rsh_s.png)
 
 * **i32.rotl**
   * 把 a 數的位元向左移 b 位，然後把超出去的位元補到右邊
 
-![](/images/lrot.png)
+![](.gitbook/assets/lrot.png)
 
 * **i32.rotr**
   * 把 a 數的位元向右移 b 位，然後把超出去的位元補到左邊
 
-![](/images/rrot.png)
+![](.gitbook/assets/rrot.png)
 
 * 以上指令都有 i64 版本
 
@@ -304,15 +309,10 @@ Type: i32, Value: 5
 * f32.trunc
   * 捨去小數部份，留下整數
 * f32.nearest
-
-  * 如果小數部份$$ \lt 0.5$$，捨去小數；如果小數部份$$ \gt 0.5$$  則進位；如果小數部份$$ = 0.5$$，取相鄰整數中是**偶數**的數
-
+  * 如果小數部份$$\lt 0.5$$，捨去小數；如果小數部份$$\gt 0.5$$ 則進位；如果小數部份$$= 0.5$$，取相鄰整數中是**偶數**的數
   * 乍看之下和四捨五入很像，不過在 "五" 的時候是取偶數，所以 22.5 會得到 22，23.5 會得到 24
-
 * f32.sqrt
-
   * 開平方根
-
 * 以上指令都有 f64 版本
 
 ### 浮點數二元運算
@@ -357,7 +357,7 @@ Type: i32, Value: 5
 * **i64.extend\_s/i32**
   * 把 i32 轉換成 i64，多出來的部份填上原本**有號整數**的 sign 位元
 
-![](/images/extend.png)
+![](.gitbook/assets/extend.png)
 
 * **i64.extend\_u/i32**
   * 把 i32 轉換成 i64，多出來的部份填上 0
@@ -427,9 +427,7 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
 * f64.reinterpret/i64
   * 將 i64 重新詮釋成 f64
 
----
-
-## 參數指令 (Parameric Instructions)
+## 參數指令 \(Parameric Instructions\)
 
 * drop
   * 從堆疊中拿出一個數值，然後捨棄不用
@@ -438,9 +436,7 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
     * 如果 $$c \ne 0$$ ，把 a 放回堆疊
     * 如果 $$c = 0$$ ，把 b 放回堆疊
 
----
-
-## 控制指令 (Control Instructions)
+## 控制指令 \(Control Instructions\)
 
 * **nop**
   * 不做任何事
@@ -451,7 +447,7 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
     * 以 Debug 模式編譯，會輸出堆疊裡的數值，不放回堆疊，方便除錯
     * 以 Release 模式編譯，會中止程式，並得到錯誤訊息
 
-### 區塊 (Block)
+### 區塊 \(Block\)
 
 接下來的 block、loop、if 指令會開啟新的程式區塊。其實就是在堆疊裡放入一個標籤 \(Label\)，這個 label 會記錄目前所處的函式、進入 block 時程式執行的位置，以及離開 block 的時候要接著執行的位置。
 
@@ -459,24 +455,23 @@ Reinterpret 比較特別，是針對相同位元長度的整數或浮點數，�
 
 大部分的組合語言會在程式的某個部份加入 label ，這種 label 就只是標籤而已，標示可以給 jump 指令跳過去的地方，再用 jump 指令改變程式的執行順序
 
-![](/images/jump.png)
+![](.gitbook/assets/jump.png)
 
 然而這種 label 可以放在幾乎任何地方，當 label 和 jump 指令變多，程式的執行順序會不好掌握，容易造成問題
 
 WebAssembly 的 block 比較像是開一個新的空間，在新的空間裡執行 block 裡的指令。一層層的架構形成結構化的控制流程 \(Structured Control Flow\)，讓指令的執行時機比較好掌控。
 
-![](/images/block.png)
+![](.gitbook/assets/block.png)
 
 其實 block 也不是完全開一個全新的空間，而是在堆疊裡的 label 有類似"遮罩"的作用，把堆疊裡的數值先遮住，讓後面的程式看不到先前留在堆疊裡的數值，block 結束之後 label 被拿走，原本在堆疊裡的數值又重見天日
 
 block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩下的數值用 drop 捨棄或是用其他方法清空，否則在轉換成 wasm 時會產生錯誤而無法轉換
 
-以下是會產生區塊的控制指令 \(函式也會，不過留待 [函式](/function.md) 章節再做討論\)
+以下是會產生區塊的控制指令 \(函式也會，不過留待 [函式](store/function.md) 章節再做討論\)
 
 * **block ... end**
-
   * block 和 end 是成對存在，中間放入要在 block 裡執行的指令，可以參考以下範例
-  * ```
+  * ```text
     (module
         (func $main
             block
@@ -488,8 +483,7 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
     )
     ```
   * 也可以幫 block 加上一個開頭是 $ 的名稱，方便之後的 br 指令操作
-
-  * ```
+  * ```text
     (module
         (func $main
             block $aaa
@@ -501,7 +495,7 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
     )
     ```
   * 還可以指定一個 block 的回傳值，這樣 block 在結束的時候，就不一定要清空，可以在堆疊裡留下一個數值給上一層的 block 使用
-  * ```
+  * ```text
     (module
         (func $main
             block $aaa (result i32)
@@ -512,11 +506,9 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
         (start $main)
     )
     ```
-
 * **loop ... end**
-
   * loop 和 block 大致上相同，唯一不同的地方在於 block 執行完之後會繼續執行接下來的指令，loop 則是再回到 loop 的開頭執行 loop 裡的指令
-  * ```
+  * ```text
     (module
         (func $main
             loop
@@ -529,11 +521,9 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
     ```
 
     上面這段範例執行之後發現停不下來是正常的，因為我們沒有跳出 loop，所以會一直不斷的回到 loop 的地方執行。這時可以按 Ctrl + C 強制結束程式
-
 * **if ... else ... end**
-
   * if 會從堆疊裡拿出一個 i32 數值，如果這個數值不是 0，開一個 block 執行 if 到 else 之間的指令；如果這個數值是 0，開一個 block 執行 else 到 end 之間的指令
-  * ```
+  * ```text
     (module
         (func $main
             i32.const 1
@@ -550,20 +540,19 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
 
     執行結果
 
-  * ```
+  * ```text
     Values in the stack:
     Type: i32, Value: 2
     ```
 
     如果把 1 換成 0，會得到以下的結果
 
-  * ```
+  * ```text
     Values in the stack:
     Type: i32, Value: 3
     ```
   * 可以省略 else 的部份，這樣當 if 從堆疊拿出 0 的時候就會繼續執行 end 之後的指令，不會執行 if 到 end 之間的指令
-
-  * ```
+  * ```text
     (module
         (func $main
             i32.const 1
@@ -580,7 +569,7 @@ block 在結束的時候如果沒有指定回傳值，必須要把堆疊裡剩�
 
 Branch instruction 一般會翻譯為 "分支指令"，不過我認為在 WebAssembly 用 "跳回" 的概念會比較好理解。上面有提到 block 是一層一層的概念，跳回 $$n$$ 在 WebAssembly 裡其實就是回到上 $$n+1$$ 層，然後執行接下來的指令，例如：
 
-```
+```text
 (module
     (func $main
         loop
@@ -597,7 +586,7 @@ Branch instruction 一般會翻譯為 "分支指令"，不過我認為在 WebAss
 
 br 0 會回到上 $$0+1$$ 層 \(就是上一層\)，然後接著執行 loop ... end 之後的指令，也就是 i32.const 3
 
-```
+```text
 (module
     (func $main
         block
@@ -619,10 +608,9 @@ br 0 會回到上 $$0+1$$ 層 \(就是上一層\)，然後接著執行 loop ... 
 br 1 會回到上 $$1+1$$ 層，所以是接著執行 block ... end 之後的指令，也就是 i32.const 4
 
 * **br**
-
   * 無條件跳回，請參考上面的範例
   * 如果 block、loop 或 if 有名稱的話，也可以在 br 後面改用名稱決定要跳出哪一層 block
-  * ```
+  * ```text
     (module
         (func $main
             block $aaa
@@ -641,11 +629,9 @@ br 1 會回到上 $$1+1$$ 層，所以是接著執行 block ... end 之後的指
         (start $main)
     )
     ```
-
 * **br\_if**
-
   * 從堆疊取出一個 i32 數值，如果該數值是 0，不做任何事；如果該數值不是 0 則執行跳回的動作
-  * ```
+  * ```text
     (module
         (func $main
             block $aaa
@@ -663,12 +649,9 @@ br 1 會回到上 $$1+1$$ 層，所以是接著執行 block ... end 之後的指
         (start $main)
     )
     ```
-
 * **br\_table**
 
-  * 後面會接著至少一個要跳回的目標，然後從堆疊中取出一個 i32 數值 $$n$$，如果 $$ 0 \le n \lt 總數量$$，跳回第 $$n-1$$ 個目標 \(從 0 開始數\)，否則跳回最後一個目標
+  * 後面會接著至少一個要跳回的目標，然後從堆疊中取出一個 i32 數值 $$n$$，如果 $$0 \le n \lt 總數量$$，跳回第 $$n-1$$ 個目標 \(從 0 開始數\)，否則跳回最後一個目標
 
-  ![](/images/brtable.png)
-
-
+  ![](.gitbook/assets/brtable.png)
 

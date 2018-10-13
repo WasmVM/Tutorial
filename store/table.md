@@ -1,18 +1,18 @@
-# 函式表 (Table)
+# 函式表
 
 WebAssembly 的 table 其實在構想上不只支援函式當作裏面的元素，不過目前的規格還是只有支援函式，所以我就暫時把 table 稱為函式表，避免大家聯想太多
 
 函式表其實就是一個裏面放有函式位置的表，之後可以根據函式表上記錄的位置，間接的呼叫函式
 
-![](images/table.png)
+![](../.gitbook/assets/table.png)
 
 ## 函式表宣告
 
 基本上和 memory 差不多，一樣是宣告在 module 裡，只能有一個
 
-```
+```text
 (module
-	(table 0 3 anyfunc)
+    (table 0 3 anyfunc)
 )
 ```
 
@@ -24,9 +24,9 @@ anyfunc 是函式表型別，誠如之前所說，目前的規格只有支援函
 
 另外也一樣可以指定名稱
 
-```
+```text
 (module
-	(table $ddd 0 3 anyfunc)
+    (table $ddd 0 3 anyfunc)
 )
 ```
 
@@ -34,16 +34,16 @@ anyfunc 是函式表型別，誠如之前所說，目前的規格只有支援函
 
 Table 的指定不再是用指令來操作，而是在 module 裡的 elem 宣告
 
-```
+```text
 (module
-	(func $aaa
-	)
-	(func
-	)
-	(func
-	)
-	(table $ddd 0 3 anyfunc)
-	(elem 0 (i32.const 1) 2 $aaa)
+    (func $aaa
+    )
+    (func
+    )
+    (func
+    )
+    (table $ddd 0 3 anyfunc)
+    (elem 0 (i32.const 1) 2 $aaa)
 )
 ```
 
@@ -51,29 +51,28 @@ Table 的指定不再是用指令來操作，而是在 module 裡的 elem 宣告
 
 後面的 i32.const 1 表示要從編號第 1 的位置開始指定
 
-![](images/elem.png)
+![](../.gitbook/assets/elem.png)
 
 如果 table 有設定最大值，指定的位址 + 元素個數不可以超過最大值
 
 elem 宣告也可以不只一個，如果指定的範圍有重複，以最下面的宣告為主
 
-```
+```text
 (module
-	(func $aaa
-	)
-	(func
-	)
-	(func
-	)
-	(table $ddd 0 3 anyfunc)
-	(elem 0 (i32.const 0) 1 0)
-	(elem $ddd (i32.const 1) 2 $aaa)
+    (func $aaa
+    )
+    (func
+    )
+    (func
+    )
+    (table $ddd 0 3 anyfunc)
+    (elem 0 (i32.const 0) 1 0)
+    (elem $ddd (i32.const 1) 2 $aaa)
 )
 ```
 
-
 ## 間接呼叫函式
 
-* **call_indirect**
-	
-	* 後面接一個整數，表示 table 中某個元素的位址。根據那個位址，從 table 中取出函數的編號，再透過編號呼叫函式
+* **call\_indirect**
+  * 後面接一個整數，表示 table 中某個元素的位址。根據那個位址，從 table 中取出函數的編號，再透過編號呼叫函式
+
