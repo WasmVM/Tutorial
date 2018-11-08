@@ -19,7 +19,7 @@ WebAssembly官方有提供 Wabt 工具可以轉換格式，以下有幾種使用
 在終端機執行
 
 ```text
-git clone git@github.com:WebAssembly/wabt.git
+git clone https://github.com/WebAssembly/wabt
 ```
 
 用瀏覽器打開資料夾裡的 demo/index.html
@@ -29,7 +29,7 @@ git clone git@github.com:WebAssembly/wabt.git
 從 GitHub 下載 Wabt
 
 ```text
-git clone git@github.com:WebAssembly/wabt.git
+git clone https://github.com/WebAssembly/wabt
 ```
 
 建立 build 資料夾並執行 CMake
