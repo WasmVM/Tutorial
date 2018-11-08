@@ -19,3 +19,6 @@
 * [虛擬機架構](wasmvm-structure.md)
 * [系統呼叫](syscall.md)
 
+## 加入討論
+
+Discord 頻道: https://discord.gg/FCYvxKC
