@@ -11,7 +11,7 @@ sudo apt install git cmake binutils
 * 接著從 GitHub 取得 WasmVM 的 簡化版 \(如果要使用一般版的話，不需要 git checkout 那行指令\)
 
 ```text
-git clone git@github.com:LuisHsu/WasmVM.git
+git clone https://github.com/WasmVM/WasmVM.git
 git checkout v0.9
 ```
 
