@@ -12,7 +12,7 @@ WebAssembly官方有提供 Wabt 工具可以轉換格式，以下有幾種使用
 
 * **直接在網站上使用 Wabt**
 
-網址: [https://cdn.rawgit.com/WebAssembly/wabt/fb986fbd/demo/wat2wasm](https://cdn.rawgit.com/WebAssembly/wabt/fb986fbd/demo/wat2wasm/]%28https://cdn.rawgit.com/WebAssembly/wabt/fb986fbd/demo/wat2wasm/\)
+網址: [https://webassembly.github.io/wabt/demo/wat2wasm/](https://webassembly.github.io/wabt/demo/wat2wasm/) 
 
 * **下載 Wabt 的離線版網站**
 
