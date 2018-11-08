@@ -5,7 +5,7 @@ WasmVM 是透過 CMake 完成編譯相關的動作和設定。除此之外只有
 * 如果沒有 git 、cmake 、 make 的話，請先打下面的指令安裝
 
 ```text
-sudo apt install git cmake binutil
+sudo apt install git cmake binutils
 ```
 
 * 接著從 GitHub 取得 WasmVM 的 簡化版 \(如果要使用一般版的話，不需要 git checkout 那行指令\)
