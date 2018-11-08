@@ -16,11 +16,13 @@
 
   WasmVM 的 GitHub 頁面，可以看到 WasmVM 的原始碼，還有一些開發時留下來的點點滴滴
 
-* [LEB128编码格式](http://gttiankai.github.io/2016/06/30/leb128编码格式.html)
+* [LEB128编码格式](http://gttiankai.github.io/2016/06/30/leb128编码格式/)
 
   當初在搞懂 LEB128 編碼格式的時候就是參考這篇文章
 
 * [維基百科](https://zh.wikipedia.org/zh-tw)
 
   講解整數、浮點數用的圖和說明有參考維基百科，這部份講的還算詳細
+
+
 
